@@ -20,7 +20,7 @@ import { AppService } from './app.service';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '8077',
+      password: '2512',
       database: 'spotify',
       entities: [User, Artist, Album, Song, Playlist],
       // synchronize: true,
