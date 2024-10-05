@@ -24,7 +24,7 @@ import { AppService } from './app.service';
       database: 'spotify',
       entities: [User, Artist, Album, Song, Playlist],
       // synchronize: true,
-      logging: true
+      // logging: true
     }),
     UsersModule,
     ArtistsModule,
