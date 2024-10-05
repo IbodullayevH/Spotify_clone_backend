@@ -8,16 +8,23 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) {}
+
+  ) { }
 
   async create(userData: Partial<User>): Promise<User> {
     const newUser = this.usersRepository.create(userData);
     return this.usersRepository.save(newUser);
   }
 
-  async findAll(): Promise<User[]> {
-    return this.usersRepository.find();
-  }
+
+  async findAll(): Promise<{ success: boolean; message: string; data: User[] }> {
+    const users = await this.usersRepository.find();
+    return {
+      success: true,
+      message: 'Users data',
+      data: users,
+    };
+  };
 
   async findOne(id: number): Promise<User> {
     return this.usersRepository.findOneBy({ id });
