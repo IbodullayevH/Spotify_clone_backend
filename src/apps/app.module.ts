@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import {TypeOrmModule } from '@nestjs/typeorm'
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AlbumsModule } from 'src/albums/albums.module';
 import { Album } from 'src/albums/entities/album.entity';
 import { ArtistsModule } from 'src/arstists/arstists.module';
@@ -10,6 +10,9 @@ import { Song } from 'src/songs/entities/song.entity';
 import { SongsModule } from 'src/songs/songs.module';
 import { User } from 'src/users/entities/user.entity';
 import { UsersModule } from 'src/users/users.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import * as path from 'path';
 
 @Module({
   imports: [
@@ -24,10 +27,12 @@ import { UsersModule } from 'src/users/users.module';
       synchronize: true,
     }),
     UsersModule,
-    ArtistsModule, 
+    ArtistsModule,
     AlbumsModule,
     SongsModule,
     PlaylistsModule
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
