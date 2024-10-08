@@ -8,6 +8,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+
   ) { }
 
   async create(userData: Partial<User>): Promise<{ success: boolean, message: string, data?: User }> {
@@ -33,6 +34,7 @@ export class UsersService {
       data: savedUser,
     };
   }
+
 
   // get all users
   async findAll(): Promise<{ success: boolean; message: string; data: User[] }> {
@@ -76,9 +78,6 @@ export class UsersService {
     };
   }
 
-
-
-
   // delete
   async remove(userId: number): Promise<{ success: boolean, message: string, data?: User }> {
     let checkUser = await this.usersRepository.findOne({
@@ -94,7 +93,6 @@ export class UsersService {
       };
     }
 
-
     await this.usersRepository.delete(userId);
 
     return {
@@ -102,5 +100,4 @@ export class UsersService {
       message: 'User deleted successfully',
     };
   }
-
 }
