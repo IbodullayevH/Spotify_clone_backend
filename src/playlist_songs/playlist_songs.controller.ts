@@ -16,18 +16,18 @@ export class PlaylistSongsController {
     return this.playlistSongsService.findAll();
   }
 
-  @Get(':playlist_id/:song_id')
-  findOne(@Param('playlist_id') playlist_id: number, @Param('song_id') song_id: number) {
-    return this.playlistSongsService.findOne(playlist_id, song_id);
+  @Get(':id')
+  async findOne(@Param('id') id: number): Promise<PlaylistSong>{
+return this.playlistSongsService.findOne(id)
+  } 
+
+  @Patch(':id')
+  async update(@Param('id') id: number, @Body() updateDate: Partial<PlaylistSong>): Promise<PlaylistSong> {
+    return this.playlistSongsService.update(id, updateDate)
   }
 
-  @Patch(':playlist_id/:song_id')
-  update(@Param('playlist_id') playlist_id: number, @Param('song_id') song_id: number, @Body() playlistSong: PlaylistSong) {
-    return this.playlistSongsService.update({ ...playlistSong, playlist_id, song_id });
-  }
-
-  @Delete(':playlist_id/:song_id')
-  remove(@Param('playlist_id') playlist_id: number, @Param('song_id') song_id: number) {
-    return this.playlistSongsService.remove(playlist_id, song_id);
+  @Delete(':id')
+ async remove(@Param('id') id: number): Promise<void> {
+    return this.playlistSongsService.remove(id);
   }
 }
