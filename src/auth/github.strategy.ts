@@ -15,7 +15,6 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
             callbackURL: process.env.GITHUB_REDIRECT_URI,
             scope: ['user:email']
         });
-        console.log(process.env.GITHUB_CLIENT_ID);
     }
 
     async validate(accessToken: string, refreshToken: string, profile: any, done: Function) {
