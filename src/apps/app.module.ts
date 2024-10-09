@@ -35,7 +35,7 @@ import { AuthModule } from 'src/auth/auth.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '8077',
+      password: '1111',
       database: 'spotify',
       entities: [
         User, Artist, Album, Song, Playlist, PlaylistSong, 
