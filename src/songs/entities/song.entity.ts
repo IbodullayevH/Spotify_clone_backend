@@ -6,7 +6,7 @@ export class Song {
 @PrimaryGeneratedColumn()
 id: number
 
-@Column()
+@Column({type:"varchar", nullable:true})
 title: string
 
 @Column({ type: 'int', nullable: true })

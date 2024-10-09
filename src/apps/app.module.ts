@@ -41,7 +41,7 @@ import { AuthModule } from 'src/auth/auth.module';
         User,
         Artist,
         Album,
-        Song,
+        Song, 
         Playlist,
         PlaylistSong,
         ListeningHistory,

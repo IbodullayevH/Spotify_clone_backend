@@ -8,7 +8,7 @@ export class Album {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ length: 100 })
+    @Column({ length: 100,type:"varchar", nullable:true })
     title: string;
 
     @Column({ type: 'int', nullable: true }) 
