@@ -18,6 +18,9 @@ export class User {
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
+  // Playlists bilan bog'lanish
   @OneToMany(() => Playlist, (playlist) => playlist.user)
-  playlists: Playlist[]
+  playlists: Playlist[];
+
+
 }

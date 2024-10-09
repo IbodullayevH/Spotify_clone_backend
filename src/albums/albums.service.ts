@@ -9,31 +9,55 @@ export class AlbumsService {
   constructor(
     @InjectRepository(Album)
     private albumsRepository: Repository<Album>,
-  ) {}
+  ) { }
 
-  create(createAlbumDto: CreateAlbumDto): Promise<Album> {
+
+  // create album 
+  async create(createAlbumDto: CreateAlbumDto): Promise<{ success: boolean; message: string; data: Album }> {
     const album = this.albumsRepository.create(createAlbumDto);
-    return this.albumsRepository.save(album);
+    const newAlbum = await this.albumsRepository.save(album);
+    return {
+      success: true,
+      message: `Successfully created album`,
+      data: newAlbum
+    }
   }
 
-  async findAll(): Promise<Album[]> {
+
+  // get all
+  async findAll(): Promise<{ success: boolean; message: string; data: Album[] }> {
     try {
-      return await this.albumsRepository.find({ relations: ['artist'] });
+      let albumData = await this.albumsRepository.find({ relations: ['artist'] });
+
+      return {
+        success: true,
+        message: `All album data`,
+        data: albumData
+      }
     } catch (error) {
       console.error(error);
       throw new InternalServerErrorException('Xato yuz berdi');
     }
   }
-  
 
-  findOne(id: number): Promise<Album> {
-    return this.albumsRepository.findOne({
+
+  // get by id
+  async findOne(id: number): Promise<{ success: boolean; message: string; data: Album }> {
+    const albumDataById = await this.albumsRepository.findOne({
       where: { id },
       relations: ['artist'],
     });
-  }
 
-  async update(id: number, userData: Partial<Album>): Promise<Album> {
+    return {
+      success: true,
+      message: `${id}th album`,
+      data: albumDataById,
+    }
+  }
+  
+
+  // update
+  async update(id: number, userData: Partial<Album>): Promise<{ success: boolean; message: string; data: Album }> {
     await this.albumsRepository.update(id, userData);
     return this.findOne(id);
   }
