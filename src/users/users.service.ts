@@ -8,13 +8,12 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+  ) {}
 
-  ) { }
-
-  async create(userData: Partial<User>): Promise<{ success: boolean, message: string, data?: User }> {
+  async create(createUserDto: Partial<User>): Promise<{ success: boolean, message: string, data?: User }> {
     let existUser = await this.usersRepository.findOne({
       where: {
-        email: userData.email
+        email: createUserDto.email
       }
     });
 
@@ -25,7 +24,7 @@ export class UsersService {
       };
     }
 
-    const newUser = this.usersRepository.create(userData);
+    const newUser = this.usersRepository.create(createUserDto);
     const savedUser = await this.usersRepository.save(newUser);
 
     return {
@@ -35,7 +34,6 @@ export class UsersService {
     };
   }
 
-
   // get all users
   async findAll(): Promise<{ success: boolean; message: string; data: User[] }> {
     const users = await this.usersRepository.find();
@@ -44,12 +42,11 @@ export class UsersService {
       message: 'Users data',
       data: users,
     };
-  };
+  }
 
   async findOne(id: number): Promise<User> {
     return this.usersRepository.findOneBy({ id });
   }
-
 
   // update user by id
   async update(userId: number, userData: Partial<User>): Promise<{ success: boolean, message: string, data?: User }> {
@@ -78,8 +75,8 @@ export class UsersService {
     };
   }
 
-  // delete
-  async remove(userId: number): Promise<{ success: boolean, message: string, data?: User }> {
+  // delete user by id
+  async remove(userId: number): Promise<{ success: boolean, message: string }> {
     let checkUser = await this.usersRepository.findOne({
       where: {
         id: userId
@@ -99,5 +96,22 @@ export class UsersService {
       success: true,
       message: 'User deleted successfully',
     };
+  }
+
+  async createOrUpdate(profile: any): Promise<User> {
+    const { username, emails } = profile;
+    const email = emails[0].value;
+    
+    let user = await this.usersRepository.findOne({ where: { email } });
+
+    if (!user) {
+      user = this.usersRepository.create({
+        username,
+        email,
+      });
+      await this.usersRepository.save(user);
+    }
+
+    return user;
   }
 }

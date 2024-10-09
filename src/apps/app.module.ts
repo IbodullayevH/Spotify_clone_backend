@@ -25,9 +25,11 @@ import { AlbumsGenres } from 'src/albums_genres/entities/albums_genre.entity';
 import { AlbumsGenresModule } from 'src/albums_genres/albums_genres.module';
 import { ArtistFollower } from 'src/artist_followers/entities/artist_follower.entity';
 import { ArtistFollowersModule } from 'src/artist_followers/artist_followers.module';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [
+  imports: [ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -48,6 +50,8 @@ import { ArtistFollowersModule } from 'src/artist_followers/artist_followers.mod
     GenresModule,
     SongGenresModule,
     AlbumsGenresModule,
+    ArtistFollowersModule, 
+    AuthModule,
     ArtistFollowersModule,
   ],
 })
