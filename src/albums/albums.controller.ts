@@ -12,7 +12,7 @@ export class AlbumsController {
     return this.albumsService.create(createAlbumDto);
   }
 
-  @Get()
+  @Get(`all`)
   findAll() {
     return this.albumsService.findAll();
   }

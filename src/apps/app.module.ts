@@ -35,9 +35,13 @@ import { AuthModule } from 'src/auth/auth.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '1111',
+      password: '8077',
       database: 'spotify',
-      entities: [User, Artist, Album, Song, Playlist, PlaylistSong, ListeningHistory, Genre, SongGenres, AlbumsGenres, ArtistFollower],
+      entities: [
+        User, Artist, Album, Song, Playlist, PlaylistSong, 
+        ListeningHistory, Genre, SongGenres, AlbumsGenres, 
+        ArtistFollower
+      ],
       synchronize: true,
     }),
     UsersModule,
@@ -51,7 +55,8 @@ import { AuthModule } from 'src/auth/auth.module';
     SongGenresModule,
     AlbumsGenresModule,
     ArtistFollowersModule, 
-    AuthModule
+    AuthModule,
+    ArtistFollowersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
