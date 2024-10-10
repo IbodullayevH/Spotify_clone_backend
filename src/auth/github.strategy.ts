@@ -4,7 +4,7 @@ import { Strategy } from "passport-github2";
 import { AuthService } from "./auth.service";
 import * as dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config(); 
 
 @Injectable()
 export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
@@ -21,10 +21,10 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
         try {
             const jwt: string = await this.authService.validateOAuthLogin(profile);
             const user = {
-                id: profile.id, 
-                username: profile.username, 
-                email: profile.emails?.[0].value || null, 
-                jwt, 
+                id: profile.id,
+                username: profile.username,
+                email: profile.emails?.[0].value || null,
+                jwt,
             };
             done(null, user);
         } catch (err) {

@@ -29,19 +29,20 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(),
+  imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: `postgres`,
-      password: `2512`,
-      database: `spotify`,
+      username: 'postgres',
+      password: '2512',
+      database: 'spotify',
       entities: [
         User,
         Artist,
         Album,
-        Song, 
+        Song,
         Playlist,
         PlaylistSong,
         ListeningHistory,
@@ -50,6 +51,7 @@ import { AuthModule } from 'src/auth/auth.module';
         AlbumsGenres,
         ArtistFollower,
       ],
+
       synchronize: true,
     }),
     UsersModule,
@@ -62,7 +64,7 @@ import { AuthModule } from 'src/auth/auth.module';
     GenresModule,
     SongGenresModule,
     AlbumsGenresModule,
-    ArtistFollowersModule, 
+    ArtistFollowersModule,
     AuthModule,
     ArtistFollowersModule,
   ],

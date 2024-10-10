@@ -15,12 +15,10 @@ export class AuthGuard implements CanActivate {
 
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest();
-        console.log(request.headers, 'Guard header');
         const authHeader = request.headers.authorization;
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             throw new UnauthorizedException('Token not provided or malformed');
         }
-
         const token = authHeader.split(' ')[1]; 
 
         try {
