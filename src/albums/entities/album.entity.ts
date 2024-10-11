@@ -17,7 +17,7 @@ export class Album {
     @Column({ type: 'date', nullable: true})
     release_date: Date;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMPT'})
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     createdAt: Date
 
     @ManyToOne(() => Artist, artist => artist.albums, {

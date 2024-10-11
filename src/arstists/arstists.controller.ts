@@ -7,27 +7,27 @@ import { UpdateArstistDto } from './dto/update-arstist.dto';
 export class ArstistsController {
   constructor(private readonly arstistsService: ArtistsService) {}
 
-  @Post()
+  @Post("new")
   create(@Body() createArstistDto: CreateArstistDto) {
     return this.arstistsService.create(createArstistDto);
   }
 
-  @Get()
+  @Get("all")
   findAll() {
     return this.arstistsService.findAll();
   }
 
-  @Get(':id')
+  @Get('id/:id')
   findOne(@Param('id') id: string) {
     return this.arstistsService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('update/:id')
   update(@Param('id') id: string, @Body() updateArstistDto: UpdateArstistDto) {
     return this.arstistsService.update(+id, updateArstistDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.arstistsService.remove(+id);
   }

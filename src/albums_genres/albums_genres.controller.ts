@@ -5,9 +5,9 @@ import { UpdateAlbumsGenreDto } from './dto/update-albums_genre.dto';
 
 @Controller('albums-genres')
 export class AlbumsGenresController {
-  constructor(private readonly albumsGenresService: AlbumsGenresService) {}
+  constructor(private readonly albumsGenresService: AlbumsGenresService) { }
 
-  @Post()
+  @Post("new")
   create(@Body() createAlbumsGenreDto: CreateAlbumsGenreDto) {
     return this.albumsGenresService.create(createAlbumsGenreDto);
   }
@@ -17,16 +17,16 @@ export class AlbumsGenresController {
     return this.albumsGenresService.findAll();
   }
 
-  @Get(':album_id/:genre_id')
+  @Get('albumId/genreId/:album_id/:genre_id')
   findOne(@Param('album_id') album_id: string,
-@Param('genre_id') genre_id: string
-) {
+    @Param('genre_id') genre_id: string
+  ) {
     return this.albumsGenresService.findById(+album_id, +genre_id);
   }
 
   @Patch(':album_id/:genre_id')
   update(
-    @Param('album_id') album_id: string, 
+    @Param('album_id') album_id: string,
     @Param('genre_id') genre_id: string,
     @Body() updateAlbumsGenreDto: UpdateAlbumsGenreDto,
   ) {
@@ -36,7 +36,7 @@ export class AlbumsGenresController {
 
   @Delete(':album_id/:genre_id')
   remove(
-    @Param('album_id') album_id: string, 
+    @Param('album_id') album_id: string,
     @Param('genre_id') genre_id: string,
   ) {
     return this.albumsGenresService.remove(+album_id, +genre_id);

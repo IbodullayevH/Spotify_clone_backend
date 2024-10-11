@@ -42,7 +42,7 @@ export class AlbumsGenresService {
   }
 
   async findAll(): Promise<AlbumsGenres[]> {
-    return this.albumGenresRepository.find({ relations: ['album', 'genre']})
+    return this.albumGenresRepository.find({ relations: ['album', 'genre']})  
   }
 
   async findById(album_id: number, genre_id: number): Promise<AlbumsGenres> {

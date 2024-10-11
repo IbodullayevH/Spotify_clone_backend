@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AlbumsModule } from 'src/albums/albums.module';
 import { Album } from 'src/albums/entities/album.entity';
 import { ArtistsModule } from 'src/arstists/arstists.module';
-import { Artist } from 'src/arstists/entities/arstist.entity'; 
+import { Artist } from 'src/arstists/entities/arstist.entity';
 import { Playlist } from 'src/playlists/entities/playlist.entity';
 import { PlaylistsModule } from 'src/playlists/playlists.module';
 import { Song } from 'src/songs/entities/song.entity';
@@ -12,7 +12,6 @@ import { User } from 'src/users/entities/user.entity';
 import { UsersModule } from 'src/users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import * as path from 'path';
 import { PlaylistSong } from 'src/playlist_songs/entities/playlist_song.entity';
 import { PlaylistSongsModule } from 'src/playlist_songs/playlist_songs.module';
 import { ListeningHistory } from 'src/listening_history/entities/listening_history.entity';
@@ -27,21 +26,22 @@ import { ArtistFollower } from 'src/artist_followers/entities/artist_follower.en
 import { ArtistFollowersModule } from 'src/artist_followers/artist_followers.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from 'src/auth/auth.module';
+import { FileController } from './file.controller';
 
 @Module({
   imports: [ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '8077',
-      database: 'spotify',
-      entities: [User, Artist, Album, Song, Playlist, PlaylistSong, ListeningHistory, Genre, SongGenres, AlbumsGenres, ArtistFollower],
-      synchronize: true,
-    }),
+  TypeOrmModule.forRoot({
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'postgres',
+    password: '8077',
+    database: 'spotify',
+    entities: [User, Artist, Album, Song, Playlist, PlaylistSong, ListeningHistory, Genre, SongGenres, AlbumsGenres, ArtistFollower],
+    synchronize: true,
+  }),
     UsersModule,
-    ArtistsModule, 
+    ArtistsModule,
     AlbumsModule,
     SongsModule,
     PlaylistsModule,
@@ -50,9 +50,11 @@ import { AuthModule } from 'src/auth/auth.module';
     GenresModule,
     SongGenresModule,
     AlbumsGenresModule,
-    ArtistFollowersModule, 
+    ArtistFollowersModule,
     AuthModule,
     ArtistFollowersModule,
   ],
+  controllers: [AppController, FileController],
+  providers: [AppService],
 })
 export class AppModule { }
