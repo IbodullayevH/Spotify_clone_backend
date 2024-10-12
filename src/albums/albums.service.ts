@@ -42,11 +42,18 @@ export class AlbumsService {
 
 
   // get by id
-  async findOne(id: number): Promise<{ success: boolean; message: string; data: Album }> {
+  async findOne(id: number): Promise<{ success: boolean; message: string; data?: Album }> {
     const albumDataById = await this.albumsRepository.findOne({
       where: { id },
       relations: ['artist'],
     });
+
+    if (!albumDataById) {
+      return {
+        success: false,
+        message: 'Not found album'
+      }
+    }
 
     return {
       success: true,
@@ -54,15 +61,30 @@ export class AlbumsService {
       data: albumDataById,
     }
   }
-  
+
 
   // update
-  async update(id: number, userData: Partial<Album>): Promise<{ success: boolean; message: string; data: Album }> {
+  async update(id: number, userData: Partial<Album>): Promise<{ success: boolean; message: string; data?: Album }> {
     await this.albumsRepository.update(id, userData);
     return this.findOne(id);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number): Promise<{ success: boolean; message: string; }> {
+
+    let [checkUser] = await this.albumsRepository.findBy({
+      id
+    })
+
+    if (!checkUser) {
+      return {
+        success: false,
+        message: 'Not found album'
+      }
+    }
     await this.albumsRepository.delete(id);
+    return {
+      success: true,
+      message: `Successfully delete album`,
+    }
   }
 }

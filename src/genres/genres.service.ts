@@ -28,6 +28,8 @@ export class GenresService {
     return this.genresRepository.save(genre)
   }
 
+
+  // update
   async update(id: number, genre: Genre): Promise<Genre> {
     const existingGenre = await this.findOne(id)
     if(!existingGenre) {

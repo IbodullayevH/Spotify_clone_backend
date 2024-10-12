@@ -8,27 +8,27 @@ import { Genre } from './entities/genre.entity';
 export class GenresController {
   constructor(private readonly genresService: GenresService) {}
 
-  @Post()
+  @Post("new")
   create(@Body() genre: Genre) {
     return this.genresService.create(genre);
   }
 
-  @Get()
+  @Get("all")
   findAll(): Promise<Genre[]> {
     return this.genresService.findAll();
   }
 
-  @Get(':id')
+  @Get('id/:id')
   findOne(@Param('id') id: string): Promise<Genre> {
     return this.genresService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('update/:id')
   update(@Param('id') id: string, @Body() genre: Genre): Promise<Genre> {
     return this.genresService.update(+id, genre);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string): Promise<void> {
     return this.genresService.remove(+id);
   }

@@ -12,7 +12,6 @@ import { User } from 'src/users/entities/user.entity';
 import { UsersModule } from 'src/users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import * as path from 'path';
 import { PlaylistSong } from 'src/playlist_songs/entities/playlist_song.entity';
 import { PlaylistSongsModule } from 'src/playlist_songs/playlist_songs.module';
 import { ListeningHistory } from 'src/listening_history/entities/listening_history.entity';
@@ -27,6 +26,7 @@ import { ArtistFollower } from 'src/artist_followers/entities/artist_follower.en
 import { ArtistFollowersModule } from 'src/artist_followers/artist_followers.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from 'src/auth/auth.module';
+import { FileController } from './file.controller';
 
 @Module({
   imports: [
@@ -68,7 +68,7 @@ import { AuthModule } from 'src/auth/auth.module';
     AuthModule,
     ArtistFollowersModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, FileController],
   providers: [AppService],
 })
 export class AppModule {}

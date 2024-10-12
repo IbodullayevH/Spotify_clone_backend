@@ -10,6 +10,7 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
+  // create new user
   async create(createUserDto: Partial<User>): Promise<{ success: boolean, message: string, data?: User }> {
     let existUser = await this.usersRepository.findOne({
       where: {

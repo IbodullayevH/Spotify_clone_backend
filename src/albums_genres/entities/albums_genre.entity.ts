@@ -10,10 +10,9 @@ export class AlbumsGenres {
     @PrimaryColumn()
     genre_id: number;
 
-    @ManyToOne(() => Album, (album) => album.albumGenres)
+    @ManyToOne(() => Album, (album) => album.albumGenres, { eager: true })
     album: Album;
 
-    @ManyToOne(() => Genre, (genre) => genre.albumsGenre
-)
-    genre: Genre
-}
+    @ManyToOne(() => Genre, (genre) => genre.albumsGenre, { eager: true })
+    genre: Genre;
+};
